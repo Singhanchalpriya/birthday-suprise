@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday ❤️</title>
+
+<style>
+body{
+  margin:0;
+  font-family:'Courier New', monospace;
+  background:linear-gradient(135deg,#ff758c,#ff7eb3);
+  color:white;
+  text-align:center;
+  overflow-x:hidden;
+}
+
+.container{
+  padding:30px;
+}
+
+h1{
+  font-size:40px;
+}
+
+#typewriter{
+  font-size:22px;
+  min-height:80px;
+  margin-top:20px;
+}
+
+/* Button */
+button{
+  padding:12px 25px;
+  font-size:18px;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+  background:white;
+  color:#ff4f7a;
+  margin-top:20px;
+}
+
+/* Surprise section */
+.surprise{
+  display:none;
+  margin-top:30px;
+}
+
+img{
+  width:260px;
+  border-radius:20px;
+  margin:15px;
+  box-shadow:0 0 20px rgba(0,0,0,0.3);
+}
+
+.shayari{
+  font-size:20px;
+  line-height:1.6;
+  margin-top:20px;
+}
+
+/* ❤️ Hearts animation */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  font-size:20px;
+  animation:floatUp 6s linear infinite;
+}
+
+@keyframes floatUp{
+  0%{transform:translateY(0);opacity:1;}
+  100%{transform:translateY(-100vh);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔐 PASSWORD SCREEN -->
+<div id="lockScreen" style="
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:linear-gradient(135deg,#ff758c,#ff7eb3);
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+z-index:9999;
+">
+
+<h1>🔐 Enter Secret Code</h1>
+<p>(Hint: Special date ❤️)</p>
+
+<input id="passwordInput" type="password" placeholder="Enter password"
+style="padding:12px;font-size:18px;border:none;border-radius:20px;text-align:center;">
+
+<button onclick="checkPassword()">Unlock 💖</button>
+<p id="errorMsg"></p>
+</div>
+
+<!-- 🎶 BACKGROUND MUSIC -->
+<audio autoplay loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+</audio>
+
+<div class="container">
+<h1>🎂 Happy Birthday My Love ❤️</h1>
+
+<div id="typewriter"></div>
+
+<button onclick="showSurprise()">Click for Surprise 🎁</button>
+
+<div class="surprise" id="surpriseBox">
+
+<!-- 📸 PHOTOS (CHANGE LINKS) -->
+<img src="https://i.imgur.com/yourimage1.jpg">
+<img src="https://i.imgur.com/yourimage2.jpg">
+
+<!-- 💌 SHAYARI -->
+<div class="shayari">
+तेरा मुस्कुराना ही मेरी खुशी है 💖<br>
+तेरी हर बात मेरी ज़िंदगी है 🌸<br>
+आज के दिन बस यही दुआ है 🙏<br>
+हर जन्म तू ही मेरी कहानी है ❤️
+</div>
+
+</div>
+</div>
+
+<script>
+/* 🔐 Password */
+function checkPassword(){
+  if(document.getElementById("passwordInput").value==="1410"){
+    document.getElementById("lockScreen").style.display="none";
+  }else{
+    document.getElementById("errorMsg").innerText="Wrong password 💔";
+  }
+}
+
+/* ✍️ Typewriter */
+const text="Today is not just your birthday… it’s the day the world got someone special 💖";
+let i=0;
+function typeWriter(){
+  if(i<text.length){
+    document.getElementById("typewriter").innerHTML+=text.charAt(i);
+    i++;
+    setTimeout(typeWriter,70);
+  }
+}
+typeWriter();
+
+/* 🎁 Surprise */
+function showSurprise(){
+  document.getElementById("surpriseBox").style.display="block";
+}
+
+/* ❤️ Floating Hearts */
+function createHeart(){
+  const heart=document.createElement("div");
+  heart.className="heart";
+  heart.innerHTML="❤️";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.fontSize=(Math.random()*20+15)+"px";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),6000);
+}
+setInterval(createHeart,400);
+</script>
+
+</body>
+</html>
