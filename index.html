@@ -19,7 +19,7 @@ body{
 }
 
 h1{
-  font-size:38px;
+  font-size:40px;
 }
 
 #typewriter{
@@ -46,7 +46,6 @@ button{
   margin-top:30px;
 }
 
-/* Images */
 img{
   width:260px;
   border-radius:20px;
@@ -54,7 +53,6 @@ img{
   box-shadow:0 0 20px rgba(0,0,0,0.3);
 }
 
-/* Shayari */
 .shayari{
   font-size:20px;
   line-height:1.6;
@@ -78,12 +76,12 @@ img{
 
 <body>
 
-<!-- 🔐 PASSWORD LOCK SCREEN -->
+<!-- 🔐 PASSWORD SCREEN -->
 <div id="lockScreen" style="
 position:fixed;
 top:0;left:0;
 width:100%;height:100%;
-background:url('lock.jpg') center/cover no-repeat;
+background:linear-gradient(135deg,#ff758c,#ff7eb3);
 display:flex;
 flex-direction:column;
 align-items:center;
@@ -115,12 +113,60 @@ style="padding:12px;font-size:18px;border:none;border-radius:20px;text-align:cen
 
 <div class="surprise" id="surpriseBox">
 
-<!-- 💌 CARD IMAGE + MESSAGE -->
-<div style="
-background:white;
-color:#ff4f7a;
-padding:20px;
-border-radius:20px;
-max-width:320px;
-margin:25px auto;
-box-shadow:0 10px 30px rgba(0,0,0,0.3);
+<!-- 📸 SAMPLE IMAGES -->
+<img src="https://i.imgur.com/6X4JZQF.jpg">
+<img src="https://i.imgur.com/8Km9tLL.jpg">
+
+<!-- 💌 SHAYARI -->
+<div class="shayari">
+तेरा मुस्कुराना ही मेरी खुशी है 💖<br>
+तेरी हर बात मेरी ज़िंदगी है 🌸<br>
+आज के दिन बस यही दुआ है 🙏<br>
+हर जन्म तू ही मेरी कहानी है ❤️
+</div>
+
+</div>
+</div>
+
+<script>
+/* 🔐 Password */
+function checkPassword(){
+  if(document.getElementById("passwordInput").value==="1410"){
+    document.getElementById("lockScreen").style.display="none";
+  }else{
+    document.getElementById("errorMsg").innerText="Wrong password 💔";
+  }
+}
+
+/* ✍️ Typewriter */
+const text="Today is not just your birthday… it’s the day the world got someone special 💖";
+let i=0;
+function typeWriter(){
+  if(i<text.length){
+    document.getElementById("typewriter").innerHTML+=text.charAt(i);
+    i++;
+    setTimeout(typeWriter,70);
+  }
+}
+typeWriter();
+
+/* 🎁 Surprise */
+function showSurprise(){
+  document.getElementById("surpriseBox").style.display="block";
+}
+
+/* ❤️ Floating Hearts */
+function createHeart(){
+  const heart=document.createElement("div");
+  heart.className="heart";
+  heart.innerHTML="❤️";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.fontSize=(Math.random()*20+15)+"px";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),6000);
+}
+setInterval(createHeart,400);
+</script>
+
+</body>
+</html>
