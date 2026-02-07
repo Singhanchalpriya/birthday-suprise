@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Birthday ❤️</title>
 
 <style>
@@ -15,41 +16,47 @@ body{
 }
 
 .container{
-  padding:30px;
+  padding:20px;
+  max-width:600px;
+  margin:auto;
 }
 
 h1{
-  font-size:38px;
+  font-size:32px;
+}
+
+@media (min-width:768px){
+  h1{font-size:38px;}
 }
 
 #typewriter{
-  font-size:22px;
+  font-size:20px;
   min-height:80px;
-  margin-top:20px;
+  margin-top:15px;
 }
 
 button{
-  padding:12px 25px;
+  padding:14px 30px;
   font-size:18px;
   border:none;
   border-radius:30px;
   cursor:pointer;
   background:white;
   color:#ff4f7a;
-  margin-top:20px;
+  margin-top:25px;
 }
 
 /* Surprise box */
 .surprise{
   display:none;
-  margin:30px auto;
+  margin:25px auto;
   background:white;
   color:#ff4f7a;
   padding:20px;
   border-radius:20px;
-  max-width:320px;
+  width:100%;
   box-shadow:0 10px 30px rgba(0,0,0,0.3);
-  font-size:22px;
+  font-size:20px;
 }
 
 /* Card */
@@ -57,19 +64,58 @@ button{
   background:white;
   color:#ff4f7a;
   padding:15px;
-  border-radius:20px;
+  border-radius:18px;
   margin-top:20px;
 }
 
 .card img{
   width:100%;
+  max-width:260px;
   border-radius:15px;
 }
 
+.card h3{
+  margin:10px 0 5px;
+}
+
+.card p{
+  margin:0;
+}
+
+/* Lock screen */
+#lockScreen{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:linear-gradient(135deg,#ff758c,#ff7eb3);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  padding:20px;
+}
+
+#lockScreen h1{
+  font-size:26px;
+}
+
+#passwordInput{
+  padding:12px;
+  font-size:18px;
+  border:none;
+  border-radius:20px;
+  text-align:center;
+  width:80%;
+  max-width:260px;
+  margin-top:10px;
+}
+
+/* Hearts */
 .heart{
   position:fixed;
   bottom:-20px;
-  font-size:20px;
+  font-size:18px;
   animation:floatUp 6s linear infinite;
 }
 
@@ -82,63 +128,51 @@ button{
 
 <body>
 
-<!-- 🔐 PASSWORD SCREEN -->
-<div id="lockScreen" style="
-position:fixed;
-top:0;left:0;
-width:100%;height:100%;
-background:linear-gradient(135deg,#ff758c,#ff7eb3);
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-z-index:9999;
-">
+<!-- 🔐 LOCK SCREEN -->
+<div id="lockScreen">
+  <h1>🔐 Enter Secret Code</h1>
+  <p>(Hint: Special date ❤️)</p>
 
-<h1>🔐 Enter Secret Code</h1>
-<p>(Hint: Special date ❤️)</p>
-
-<input id="passwordInput" type="password" placeholder="Enter password"
-style="padding:12px;font-size:18px;border:none;border-radius:20px;text-align:center;">
-
-<button onclick="checkPassword()">Unlock 💖</button>
-<p id="errorMsg"></p>
+  <input id="passwordInput" type="password" placeholder="Enter password">
+  <button onclick="checkPassword()">Unlock 💖</button>
+  <p id="errorMsg"></p>
 </div>
 
-<audio autoplay loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+<!-- 🎶 ROMANTIC MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_5c1f0d3b1b.mp3" type="audio/mpeg">
 </audio>
 
 <div class="container">
-<h1>🎂 Happy Birthday My Love ❤️</h1>
+  <h1>🎂 Happy Birthday My Love ❤️</h1>
 
-<div id="typewriter"></div>
+  <div id="typewriter"></div>
 
-<button onclick="showSurprise()">Click for Surprise 🎁</button>
+  <button onclick="showSurprise()">Click for Surprise 🎁</button>
 
-<!-- 🎁 SURPRISE -->
-<div class="surprise" id="surpriseBox">
-  🍝 White pasta treat for my <b>Anand</b> ❤️
+  <!-- 🎁 SURPRISE -->
+  <div class="surprise" id="surpriseBox">
+    🍝 White pasta treat for my <b>Anand</b> ❤️
 
-  <!-- 💌 CARD -->
-  <div class="card">
-    <img src="card.jpg">
-    <h3>Happy Birthday Duggu 🎂</h3>
-    <p>I love you forever ❤️</p>
+    <div class="card">
+      <img src="card.jpg">
+      <h3>Happy Birthday Duggu 🎂</h3>
+      <p>I love you forever ❤️</p>
+    </div>
   </div>
-</div>
-
 </div>
 
 <script>
 function checkPassword(){
   if(document.getElementById("passwordInput").value==="1410"){
     document.getElementById("lockScreen").style.display="none";
+    document.getElementById("bgMusic").play();
   }else{
     document.getElementById("errorMsg").innerText="Wrong password 💔";
   }
 }
 
+/* Typewriter */
 const text="Today is not just your birthday… it’s the day the world got someone special 💖";
 let i=0;
 function typeWriter(){
@@ -154,16 +188,17 @@ function showSurprise(){
   document.getElementById("surpriseBox").style.display="block";
 }
 
+/* Hearts */
 function createHeart(){
   const heart=document.createElement("div");
   heart.className="heart";
   heart.innerHTML="❤️";
   heart.style.left=Math.random()*100+"vw";
-  heart.style.fontSize=(Math.random()*20+15)+"px";
+  heart.style.fontSize=(Math.random()*20+14)+"px";
   document.body.appendChild(heart);
   setTimeout(()=>heart.remove(),6000);
 }
-setInterval(createHeart,400);
+setInterval(createHeart,450);
 </script>
 
 </body>
