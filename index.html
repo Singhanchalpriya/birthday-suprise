@@ -1,121 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday My Love</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday ❤️</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
-    }
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI', sans-serif;
+}
 
-    body {
-      background: linear-gradient(135deg, #ff7aa2, #ffb6c1);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: white;
-      padding: 20px;
-    }
+body{
+  background:linear-gradient(135deg,#ff7aa2,#ffb6c1);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  color:white;
+  padding:20px;
+}
 
-    .container {
-      width: 100%;
-      max-width: 420px;
-    }
+/* 🔐 LOCK SCREEN */
+#lockScreen{
+  position:fixed;
+  top:0;left:0;
+  width:100%;
+  height:100%;
+  background:linear-gradient(135deg,#ff7aa2,#ffb6c1);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
 
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 10px;
-    }
+#lockScreen h1{
+  margin-bottom:10px;
+}
 
-    p {
-      font-size: 1rem;
-      margin-bottom: 20px;
-    }
+#lockScreen input{
+  padding:12px;
+  font-size:18px;
+  border:none;
+  border-radius:25px;
+  text-align:center;
+  margin-bottom:15px;
+  width:220px;
+}
 
-    button {
-      background: white;
-      color: #ff4d79;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 30px;
-      font-size: 1rem;
-      cursor: pointer;
-      font-weight: bold;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
+#lockScreen button{
+  background:white;
+  color:#ff4d79;
+  border:none;
+  padding:12px 25px;
+  border-radius:30px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
 
-    button:hover {
-      transform: scale(1.05);
-    }
+#errorMsg{
+  margin-top:10px;
+  color:#fff;
+}
 
-    .card {
-      display: none;
-      margin-top: 25px;
-      background: white;
-      border-radius: 15px;
-      padding: 15px;
-      color: #ff4d79;
-      animation: fadeIn 0.5s ease-in-out;
-    }
+/* MAIN CONTENT */
+.container{
+  width:100%;
+  max-width:420px;
+}
 
-    .card img {
-      width: 100%;
-      border-radius: 12px;
-    }
+h2{
+  font-size:1.9rem;
+  margin-bottom:12px;
+}
 
-    .card h2 {
-      margin-top: 12px;
-      font-size: 1.2rem;
-    }
+p{
+  font-size:1rem;
+  margin-bottom:20px;
+}
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+.main-btn{
+  background:white;
+  color:#ff4d79;
+  border:none;
+  padding:14px 22px;
+  border-radius:30px;
+  font-size:1rem;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
 
-    audio {
-      display: none;
-    }
-  </style>
+/* CARD */
+.card{
+  display:none;
+  margin-top:25px;
+  background:white;
+  border-radius:16px;
+  padding:15px;
+  color:#ff4d79;
+  animation:fadeIn 0.5s ease-in-out;
+}
+
+.card img{
+  width:100%;
+  border-radius:12px;
+}
+
+.card h3{
+  margin-top:12px;
+  font-size:1.1rem;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(10px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+audio{display:none;}
+</style>
 </head>
+
 <body>
 
-  <div class="container">
-    <h1>🎂 Happy Birthday My Love ❤️</h1>
-    <p>Health, wealth, love, and all your dreams—may life give you everything you deserve. 💫❤️</p>
+<!-- 🔐 PASSWORD SCREEN -->
+<div id="lockScreen">
+  <h1>🔐 Enter Secret Code</h1>
+  <p>(Hint: Special Date ❤️)</p>
+  <input type="password" id="passwordInput" placeholder="Enter password">
+  <button onclick="checkPassword()">Unlock 💖</button>
+  <div id="errorMsg"></div>
+</div>
 
-    <button onclick="toggleSurprise()">
-      🍝 White Sauce Pasta treat from my Anand 🤍
-    </button>
+<!-- ❤️ MAIN PAGE -->
+<div class="container">
+  <h2>🎂 Happy Birthday My Love ❤️</h2>
+  <p>
+    Health, wealth, love, and all your dreams —  
+    may life give you everything you deserve 💫❤️
+  </p>
 
-    <div class="card" id="surpriseCard">
-      <img src="card.jpg" alt="Birthday Card">
-      <h2>Happy Birthday Duggu,<br>I love you forever ❤️</h2>
-    </div>
+  <button class="main-btn" onclick="toggleSurprise()">
+    🍝 White Sauce Pasta treat from my Anand 🤍
+  </button>
+
+  <!-- 🎁 CARD -->
+  <div class="card" id="surpriseCard">
+    <img src="card.jpg" alt="Birthday Card">
+    <h3>
+      Happy Birthday Duggu,<br>
+      I love you forever ❤️
+    </h3>
   </div>
+</div>
 
-  <audio id="bgMusic" autoplay loop>
-    <source src="romantic.mp3" type="audio/mpeg">
-  </audio>
+<!-- 🎶 MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="romantic.mp3" type="audio/mpeg">
+</audio>
 
-  <script>
-    let isVisible = false;
-    const card = document.getElementById("surpriseCard");
-    const music = document.getElementById("bgMusic");
+<script>
+/* PASSWORD */
+function checkPassword(){
+  if(document.getElementById("passwordInput").value === "1410"){
+    document.getElementById("lockScreen").style.display = "none";
+    document.getElementById("bgMusic").play();
+  }else{
+    document.getElementById("errorMsg").innerText = "Wrong password 💔";
+  }
+}
 
-    function toggleSurprise() {
-      isVisible = !isVisible;
-      card.style.display = isVisible ? "block" : "none";
-      music.play();
-    }
-  </script>
+/* TOGGLE CARD */
+let visible = false;
+function toggleSurprise(){
+  const card = document.getElementById("surpriseCard");
+  visible = !visible;
+  card.style.display = visible ? "block" : "none";
+}
+</script>
 
 </body>
 </html>
