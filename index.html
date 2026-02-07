@@ -1,205 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday ❤️</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday My Love</title>
 
-<style>
-body{
-  margin:0;
-  font-family:'Courier New', monospace;
-  background:linear-gradient(135deg,#ff758c,#ff7eb3);
-  color:white;
-  text-align:center;
-  overflow-x:hidden;
-}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
 
-.container{
-  padding:20px;
-  max-width:600px;
-  margin:auto;
-}
+    body {
+      background: linear-gradient(135deg, #ff7aa2, #ffb6c1);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      padding: 20px;
+    }
 
-h1{
-  font-size:32px;
-}
+    .container {
+      width: 100%;
+      max-width: 420px;
+    }
 
-@media (min-width:768px){
-  h1{font-size:38px;}
-}
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
 
-#typewriter{
-  font-size:20px;
-  min-height:80px;
-  margin-top:15px;
-}
+    p {
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
 
-button{
-  padding:14px 30px;
-  font-size:18px;
-  border:none;
-  border-radius:30px;
-  cursor:pointer;
-  background:white;
-  color:#ff4f7a;
-  margin-top:25px;
-}
+    button {
+      background: white;
+      color: #ff4d79;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
 
-/* Surprise box */
-.surprise{
-  display:none;
-  margin:25px auto;
-  background:white;
-  color:#ff4f7a;
-  padding:20px;
-  border-radius:20px;
-  width:100%;
-  box-shadow:0 10px 30px rgba(0,0,0,0.3);
-  font-size:20px;
-}
+    button:hover {
+      transform: scale(1.05);
+    }
 
-/* Card */
-.card{
-  background:white;
-  color:#ff4f7a;
-  padding:15px;
-  border-radius:18px;
-  margin-top:20px;
-}
+    .card {
+      display: none;
+      margin-top: 25px;
+      background: white;
+      border-radius: 15px;
+      padding: 15px;
+      color: #ff4d79;
+      animation: fadeIn 0.5s ease-in-out;
+    }
 
-.card img{
-  width:100%;
-  max-width:260px;
-  border-radius:15px;
-}
+    .card img {
+      width: 100%;
+      border-radius: 12px;
+    }
 
-.card h3{
-  margin:10px 0 5px;
-}
+    .card h2 {
+      margin-top: 12px;
+      font-size: 1.2rem;
+    }
 
-.card p{
-  margin:0;
-}
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-/* Lock screen */
-#lockScreen{
-  position:fixed;
-  top:0;left:0;
-  width:100%;height:100%;
-  background:linear-gradient(135deg,#ff758c,#ff7eb3);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  z-index:9999;
-  padding:20px;
-}
-
-#lockScreen h1{
-  font-size:26px;
-}
-
-#passwordInput{
-  padding:12px;
-  font-size:18px;
-  border:none;
-  border-radius:20px;
-  text-align:center;
-  width:80%;
-  max-width:260px;
-  margin-top:10px;
-}
-
-/* Hearts */
-.heart{
-  position:fixed;
-  bottom:-20px;
-  font-size:18px;
-  animation:floatUp 6s linear infinite;
-}
-
-@keyframes floatUp{
-  0%{transform:translateY(0);opacity:1;}
-  100%{transform:translateY(-100vh);opacity:0;}
-}
-</style>
+    audio {
+      display: none;
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- 🔐 LOCK SCREEN -->
-<div id="lockScreen">
-  <h1>🔐 Enter Secret Code</h1>
-  <p>(Hint: Special date ❤️)</p>
+  <div class="container">
+    <h1>🎂 Happy Birthday My Love ❤️</h1>
+    <p>Health, wealth, love, and all your dreams—may life give you everything you deserve. 💫❤️</p>
 
-  <input id="passwordInput" type="password" placeholder="Enter password">
-  <button onclick="checkPassword()">Unlock 💖</button>
-  <p id="errorMsg"></p>
-</div>
+    <button onclick="toggleSurprise()">
+      🍝 White Sauce Pasta treat from my Anand 🤍
+    </button>
 
-<!-- 🎶 ROMANTIC MUSIC -->
-<audio id="bgMusic" loop>
-  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_5c1f0d3b1b.mp3" type="audio/mpeg">
-</audio>
-
-<div class="container">
-  <h1>🎂 Happy Birthday My Love ❤️</h1>
-
-  <div id="typewriter"></div>
-
-  <button onclick="showSurprise()">Click for Surprise 🎁</button>
-
-  <!-- 🎁 SURPRISE -->
-  <div class="surprise" id="surpriseBox">
-    🍝 White pasta treat for my <b>Anand</b> ❤️
-
-    <div class="card">
-      <img src="card.jpg">
-      <h3>Happy Birthday Duggu 🎂</h3>
-      <p>I love you forever ❤️</p>
+    <div class="card" id="surpriseCard">
+      <img src="card.jpg" alt="Birthday Card">
+      <h2>Happy Birthday Duggu,<br>I love you forever ❤️</h2>
     </div>
   </div>
-</div>
 
-<script>
-function checkPassword(){
-  if(document.getElementById("passwordInput").value==="1410"){
-    document.getElementById("lockScreen").style.display="none";
-    document.getElementById("bgMusic").play();
-  }else{
-    document.getElementById("errorMsg").innerText="Wrong password 💔";
-  }
-}
+  <audio id="bgMusic" autoplay loop>
+    <source src="romantic.mp3" type="audio/mpeg">
+  </audio>
 
-/* Typewriter */
-const text="Today is not just your birthday… it’s the day the world got someone special 💖";
-let i=0;
-function typeWriter(){
-  if(i<text.length){
-    document.getElementById("typewriter").innerHTML+=text.charAt(i);
-    i++;
-    setTimeout(typeWriter,70);
-  }
-}
-typeWriter();
+  <script>
+    let isVisible = false;
+    const card = document.getElementById("surpriseCard");
+    const music = document.getElementById("bgMusic");
 
-function showSurprise(){
-  document.getElementById("surpriseBox").style.display="block";
-}
-
-/* Hearts */
-function createHeart(){
-  const heart=document.createElement("div");
-  heart.className="heart";
-  heart.innerHTML="❤️";
-  heart.style.left=Math.random()*100+"vw";
-  heart.style.fontSize=(Math.random()*20+14)+"px";
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),6000);
-}
-setInterval(createHeart,450);
-</script>
+    function toggleSurprise() {
+      isVisible = !isVisible;
+      card.style.display = isVisible ? "block" : "none";
+      music.play();
+    }
+  </script>
 
 </body>
 </html>
